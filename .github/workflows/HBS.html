@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holistic Hospitality Solution Consultant | Operational Engineering</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blueblack: '#050B14',      // Ultra deep corporate blue-black
+                        slateblack: '#0D1527',     // Premium secondary container blue
+                        electricblue: '#0066FF',   // Highly vibrant electric blue (from image_16c362.jpg)
+                        cyanaccent: '#00E5FF',     // Modern glowing cyan accent
+                        iceblue: '#F0F6FF',        // Soft premium ice blue text contrast
+                        mutedblue: '#5C6F84',      // Soft blue-grey for secondary labels
+                        cardbg: '#111D33',         // Elevated blue-black card surfaces
+                        successgreen: '#10B981',
+                        dangerred: '#EF4444'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'Playfair Display', 'serif'],
+                        sans: ['Inter', 'Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Editorial Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js for 3D Flow & Architectural Simulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        /* Premium custom scrollbar matching corporate palette */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050B14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0066FF;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E5FF;
+        }
+        
+        /* High-contrast glows and modern B2B shadow effects */
+        .blue-glow:hover {
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.45);
+        }
+        .text-glow {
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+        }
+        
+        /* Smooth page transition animations */
+        .page-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Canvas absolute overlay setup */
+        #three-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 480px;
+        }
+    </style>
+</head>
+<body class="bg-blueblack text-iceblue font-sans min-h-screen flex flex-col justify-between selection:bg-electricblue selection:text-white overflow-x-hidden">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-blueblack/95 backdrop-blur-md border-b border-electricblue/20 px-6 lg:px-16 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logomark (hlstk.jpg) & Title -->
+            <a href="#" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+                <div class="h-11 w-11 border border-electricblue/30 flex items-center justify-center bg-white p-0.5 overflow-hidden transition-all duration-500 group-hover:border-cyanaccent">
+                    <img src="hlstk.jpg" alt="Holistic Consulting" class="h-full w-full object-contain" onerror="this.src='https://placehold.co/100x100/ffffff/050b14?text=HC'">
+                </div>
+                <div>
+                    <h1 class="font-serif text-base tracking-wider font-semibold uppercase text-electricblue group-hover:text-cyanaccent transition leading-tight">HOLISTIC CONSULTING</h1>
+                    <p class="text-[9px] uppercase tracking-[0.25em] text-iceblue/60">Solution Consultant</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Items -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <button onclick="navigateTo('home')" class="nav-link font-medium text-xs uppercase tracking-widest text-electricblue hover:text-white transition duration-300">Home</button>
+                <button onclick="navigateTo('services')" class="nav-link font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue transition duration-300">Solutions</button>
+                <button onclick="navigateTo('gallery')" class="nav-link font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue transition duration-300">Gallery & Stories</button>
+                <button onclick="navigateTo('proof')" class="nav-link font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue transition duration-300">The Proof</button>
+                <button onclick="navigateTo('about')" class="nav-link font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue transition duration-300">Philosophy</button>
+                <button onclick="navigateTo('contact')" class="nav-link font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue transition duration-300">Operational Intake</button>
+                <button onclick="navigateTo('admin')" class="nav-link font-medium text-xs uppercase tracking-widest text-iceblue/40 hover:text-electricblue transition duration-300 flex items-center gap-1.5 border-l border-electricblue/20 pl-4">
+                    <i class="fa-solid fa-lock text-[10px] text-electricblue"></i> Owner Console
+                </button>
+            </nav>
+
+            <!-- Social quicklinks in header -->
+            <div class="hidden xl:flex items-center gap-4 text-sm text-iceblue/70">
+                <a href="https://linkedin.com" target="_blank" class="hover:text-electricblue transition"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://telegram.org" target="_blank" class="hover:text-electricblue transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://instagram.com" target="_blank" class="hover:text-electricblue transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+
+            <!-- CTA Header Button -->
+            <div class="hidden sm:block">
+                <button onclick="navigateTo('contact')" class="px-5 py-2 border border-electricblue text-electricblue text-xs uppercase tracking-widest hover:bg-electricblue hover:text-white transition-all duration-300 blue-glow">
+                    Audit My Business
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Menu -->
+            <button id="mobile-menu-btn" class="lg:hidden text-electricblue text-xl focus:outline-none" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Nav Menu -->
+        <div id="mobile-dropdown" class="hidden lg:hidden mt-4 pt-4 border-t border-electricblue/10 space-y-4">
+            <button onclick="navigateTo('home')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-electricblue">Home</button>
+            <button onclick="navigateTo('services')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue">Solutions</button>
+            <button onclick="navigateTo('gallery')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue">Gallery & Stories</button>
+            <button onclick="navigateTo('proof')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue">The Proof</button>
+            <button onclick="navigateTo('about')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue">Philosophy</button>
+            <button onclick="navigateTo('contact')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-iceblue/70 hover:text-electricblue">Operational Intake</button>
+            <button onclick="navigateTo('admin')" class="block w-full text-left py-2 font-medium text-xs uppercase tracking-widest text-iceblue/40 hover:text-electricblue"><i class="fa-solid fa-lock mr-1.5 text-electricblue"></i>Owner Console</button>
+            
+            <div class="flex gap-4 pt-2 text-sm justify-center border-t border-electricblue/15">
+                <a href="https://linkedin.com" target="_blank" class="text-iceblue/70 hover:text-electricblue"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://telegram.org" target="_blank" class="text-iceblue/70 hover:text-electricblue"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://instagram.com" target="_blank" class="text-iceblue/70 hover:text-electricblue"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <button onclick="navigateTo('contact')" class="block w-full text-center py-3 bg-electricblue text-white text-xs uppercase tracking-widest font-bold">Audit My Business</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow">
+        
+        <!-- PAGE 1: HOME SECTION (ACTS AS DEFAULT MAIN VIEW) -->
+        <section id="page-home" class="page-transition block py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                <!-- Hero Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+                    <!-- Column 1: Editorial Hook -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-BrownW/10 border border-electricblue/30 rounded-none">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyanaccent animate-pulse"></span>
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-cyanaccent font-semibold">Holistic Hospitality Restructuring</span>
+                        </div>
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-tight">
+                            We Turn Culinary Concepts Into <br>
+                            <span class="text-electricblue text-glow font-serif italic">Profitable Realities.</span>
+                        </h2>
+                        <p class="text-iceblue/80 text-base md:text-lg max-w-xl font-light leading-relaxed">
+                            Operational restructuring, menu engineering, and strict cost-to-profit optimization for modern hospitality brands. We bridge the gap between financial discipline and hospitality craft.
+                        </p>
+
+                        <!-- Live Metric Pill -->
+                        <div class="p-4 bg-slateblack/60 border-l-2 border-electricblue max-w-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs uppercase tracking-wider text-iceblue/60">Target Objective:</span>
+                                <span class="text-xs font-semibold text-cyanaccent"><i class="fa-solid fa-chart-line mr-1"></i> Cost Reduction</span>
+                            </div>
+                            <p class="text-sm font-light mt-1 text-iceblue/90">
+                                Averaging a <span class="text-cyanaccent font-bold">6.4% prime cost reduction</span> within the first 90 days.
+                            </p>
+                        </div>
+
+                        <!-- CTA Stack -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                            <button onclick="navigateTo('contact')" class="px-8 py-4 bg-electricblue text-white font-bold text-xs uppercase tracking-widest hover:bg-cyanaccent hover:text-blueblack transition-all duration-300 shadow-lg blue-glow">
+                                Book Operational Assessment
+                            </button>
+                            <button onclick="navigateTo('services')" class="px-8 py-4 border border-iceblue/20 text-iceblue font-bold text-xs uppercase tracking-widest hover:border-electricblue hover:text-electricblue transition-all duration-300">
+                                Explore Solutions
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Interactive 3D Operational Flow Engine -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="border border-electricblue/20 p-4 bg-slateblack/80 relative overflow-hidden group">
+                            <div class="absolute top-3 left-3 z-10 bg-blueblack/90 px-3 py-1 border border-electricblue/20 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-cyanaccent"></span>
+                                <span class="text-[10px] uppercase tracking-wider text-iceblue/80 font-mono">Interactive Flow Simulation</span>
+                            </div>
+                            
+                            <!-- 3D Canvas Host -->
+                            <div id="three-canvas-container" class="rounded-none bg-blueblack overflow-hidden">
+                                <canvas id="three-canvas" class="w-full h-full cursor-pointer"></canvas>
+                            </div>
+
+                            <!-- Interactive Dashboard Underlay -->
+                            <div class="mt-4 pt-4 border-t border-electricblue/15 flex justify-between items-center text-xs">
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-iceblue/40">Visualizer Mode</p>
+                                    <p class="font-semibold text-electricblue" id="visualizer-status">Kitchen & Floor Efficiency Analysis</p>
+                                </div>
+                                <button id="flow-optimize-btn" class="px-3 py-1.5 bg-electricblue/15 border border-electricblue/30 hover:bg-electricblue hover:text-white text-electricblue transition-all duration-300 font-bold uppercase tracking-widest text-[9px]">
+                                    Optimize Flow
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-center text-[11px] text-iceblue/40 mt-2 font-mono italic">
+                            *Drag mouse to rotate dining grid wireframe layout simulation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Unique Factor Cards (Directly inspired by image_16c362.jpg) -->
+                <div class="mb-24 py-16 border-t border-b border-electricblue/10">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <p class="text-[11px] uppercase tracking-[0.3em] text-electricblue font-semibold mb-2">Company Unique Factors</p>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white">Why Modern Food Venues Choose Us</h3>
+                        <p class="text-iceblue/60 mt-4 text-sm md:text-base font-light">
+                            High revenue does not equal financial health. Many popular ventures bleed capital in critical areas due to a lack of systematized controls.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <!-- Unique Factor 1 -->
+                        <div class="p-8 bg-cardbg border border-electricblue/10 text-center relative hover:border-cyanaccent/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-full border border-electricblue/30 flex items-center justify-center mx-auto mb-6 bg-blueblack">
+                                <i class="fa-solid fa-calculator text-cyanaccent text-lg"></i>
+                            </div>
+                            <h4 class="font-serif text-lg text-white mb-3">Profit & Margin Engineering</h4>
+                            <p class="text-iceblue/70 text-xs leading-relaxed font-light">
+                                Isolating the actual-vs-theoretical food variances and standardizing yields to protect your key margins.
+                            </p>
+                        </div>
+
+                        <!-- Unique Factor 2 -->
+                        <div class="p-8 bg-cardbg border border-electricblue/10 text-center relative hover:border-cyanaccent/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-full border border-electricblue/30 flex items-center justify-center mx-auto mb-6 bg-blueblack">
+                                <i class="fa-solid fa-road text-cyanaccent text-lg"></i>
+                            </div>
+                            <h4 class="font-serif text-lg text-white mb-3">Pre-Opening Layout Paths</h4>
+                            <p class="text-iceblue/70 text-xs leading-relaxed font-light">
+                                Meticulous pre-opening checklists, vendor onboarding timelines, and CAD-driven workflow maps.
+                            </p>
+                        </div>
+
+                        <!-- Unique Factor 3 -->
+                        <div class="p-8 bg-cardbg border border-electricblue/10 text-center relative hover:border-cyanaccent/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-full border border-electricblue/30 flex items-center justify-center mx-auto mb-6 bg-blueblack">
+                                <i class="fa-solid fa-users text-cyanaccent text-lg animate-pulse"></i>
+                            </div>
+                            <h4 class="font-serif text-lg text-white mb-3">Systematized SOPs & Training</h4>
+                            <p class="text-iceblue/70 text-xs leading-relaxed font-light">
+                                Front and Back of House training cycles that instill professional pride and reduce costly employee turnover.
+                            </p>
+                        </div>
+
+                        <!-- Unique Factor 4 -->
+                        <div class="p-8 bg-electricblue border border-electricblue text-center relative hover:bg-blue-700 transition duration-300 shadow-lg shadow-electricblue/10">
+                            <div class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center mx-auto mb-6 bg-white/10">
+                                <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-serif text-lg text-white mb-3">Complete operational turnaround</h4>
+                            <p class="text-white/90 text-xs leading-relaxed font-light">
+                                Transforming legacy operations with modern control architectures, sensory lighting, and high efficiency pathways.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Core Pillars of Service -->
+                <div class="mb-24">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.3em] text-electricblue font-semibold mb-2">Our Capabilities</p>
+                            <h3 class="font-serif text-3xl md:text-4xl text-white">Structured Solutions</h3>
+                        </div>
+                        <button onclick="navigateTo('services')" class="mt-4 md:mt-0 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-electricblue hover:text-white transition duration-300">
+                            View Solution Breakdowns <i class="fa-solid fa-arrow-right-long"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <!-- Pillar 1 -->
+                        <div class="p-6 bg-cardbg border border-electricblue/10 flex flex-col justify-between hover:bg-slateblack transition duration-300 group">
+                            <div>
+                                <h4 class="font-serif text-lg text-electricblue mb-4 group-hover:text-white transition">01 / Concept Blueprinting</h4>
+                                <p class="text-xs text-iceblue/70 leading-relaxed font-light mb-8">
+                                    Pre-opening checklists, vendor onboarding management, architectural kitchen layouts, and standard launching operations.
+                                </p>
+                            </div>
+                            <button onclick="navigateTo('services')" class="text-[10px] uppercase tracking-widest text-iceblue/50 group-hover:text-cyanaccent transition font-bold text-left">
+                                Deep Dive <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                            </button>
+                        </div>
+
+                        <!-- Pillar 2 -->
+                        <div class="p-6 bg-cardbg border border-electricblue/10 flex flex-col justify-between hover:bg-slateblack transition duration-300 group">
+                            <div>
+                                <h4 class="font-serif text-lg text-electricblue mb-4 group-hover:text-white transition">02 / Financial Rigor</h4>
+                                <p class="text-xs text-iceblue/70 leading-relaxed font-light mb-8">
+                                    Menu costing models, waste reduction tracking sheets, theoretical vs actual food cost matrices, and labor optimization scheduling.
+                                </p>
+                            </div>
+                            <button onclick="navigateTo('services')" class="text-[10px] uppercase tracking-widest text-iceblue/50 group-hover:text-cyanaccent transition font-bold text-left">
+                                Deep Dive <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                            </button>
+                        </div>
+
+                        <!-- Pillar 3 -->
+                        <div class="p-6 bg-cardbg border border-electricblue/10 flex flex-col justify-between hover:bg-slateblack transition duration-300 group">
+                            <div>
+                                <h4 class="font-serif text-lg text-electricblue mb-4 group-hover:text-white transition">03 / Menu Psychology</h4>
+                                <p class="text-xs text-iceblue/70 leading-relaxed font-light mb-8">
+                                    Standard recipes, yield adjustments, layout typography engineering to guide buyers toward high-margin items naturally.
+                                </p>
+                            </div>
+                            <button onclick="navigateTo('services')" class="text-[10px] uppercase tracking-widest text-iceblue/50 group-hover:text-cyanaccent transition font-bold text-left">
+                                Deep Dive <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                            </button>
+                        </div>
+
+                        <!-- Pillar 4 -->
+                        <div class="p-6 bg-cardbg border border-electricblue/10 flex flex-col justify-between hover:bg-slateblack transition duration-300 group">
+                            <div>
+                                <h4 class="font-serif text-lg text-electricblue mb-4 group-hover:text-white transition">04 / Standard Operating Procedures</h4>
+                                <p class="text-xs text-iceblue/70 leading-relaxed font-light mb-8">
+                                    FOH service cycles, BOH culinary steps, and management templates ensuring predictable luxury on every shifts.
+                                </p>
+                            </div>
+                            <button onclick="navigateTo('services')" class="text-[10px] uppercase tracking-widest text-iceblue/50 group-hover:text-cyanaccent transition font-bold text-left">
+                                Deep Dive <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual & Ambient Showcase utilizing client-supplied image reference -->
+                <div class="mb-24 py-12 border-t border-electricblue/15">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="relative order-2 lg:order-1">
+                            <!-- Frame design for image_18379b.jpg -->
+                            <div class="relative w-full max-w-lg mx-auto border-2 border-electricblue/30 p-3 bg-slateblack shadow-2xl">
+                                <div class="overflow-hidden aspect-[3/4] max-h-[500px]">
+                                    <!-- Fallback layout for image_18379b.jpg -->
+                                    <img src="image_18379b.jpg" onerror="this.src='https://placehold.co/600x800/050b14/0066FF?text=Holistic+Ambiance+Concept'" class="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition duration-500" alt="Ambiance & Lighting Consulting Design Structure" />
+                                </div>
+                                <div class="absolute -bottom-6 -right-6 bg-electricblue text-white p-4 max-w-xs shadow-xl hidden md:block border border-cyanaccent/20">
+                                    <p class="text-[10px] uppercase font-bold tracking-widest font-mono text-cyanaccent">Design Standard</p>
+                                    <p class="text-xs italic font-serif">"Lighting, flow, and structural layout represent 40% of standard guest retention rates."</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6 order-1 lg:order-2">
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-electricblue font-mono">Sensory Architecture</p>
+                            <h3 class="font-serif text-3xl md:text-4xl text-white">Visual Ambiance & Spatial Flow</h3>
+                            <p class="text-iceblue/80 text-sm leading-relaxed font-light">
+                                Hospitality is a highly kinetic discipline. As referenced in our lighting and layout blueprint standards (shown in <span class="text-electricblue font-mono">image_18379b.jpg</span>), the alignment of warm accent glows against clean modernist architectural boundaries influences patron behavior, dining duration, and average order value.
+                            </p>
+                            <p class="text-iceblue/60 text-xs leading-relaxed font-light">
+                                We help select raw materials, lighting designs, color systems, and staff walk-paths that align with operational parameters. Design without operational efficiency produces friction; operation without aesthetics produces zero memory. We integrate both.
+                            </p>
+                            <div class="pt-4 border-t border-electricblue/20">
+                                <button onclick="navigateTo('services')" class="px-6 py-3 border border-electricblue text-electricblue text-[10px] uppercase tracking-widest hover:bg-electricblue hover:text-white transition-all duration-300">
+                                    View Spatial Blueprints
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Dynamic Tool Highlight -->
+                <div class="bg-slateblack border border-electricblue/20 p-8 lg:p-12 mb-24 rounded-none">
+                    <div class="max-w-3xl mx-auto text-center mb-8">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-cyanaccent font-mono">Try Our Interactive B2B Tool</p>
+                        <h3 class="font-serif text-2xl lg:text-3xl text-white">Evaluate Your Recipe Costing Matrix</h3>
+                        <p class="text-xs text-iceblue/60 mt-2">Check how an unoptimized food costing structure and lack of engineering damages your bottom line profit margin dynamically.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto bg-blueblack p-6 border border-electricblue/10">
+                        <!-- Inputs -->
+                        <div class="space-y-4">
+                            <p class="text-xs uppercase tracking-wider text-electricblue font-semibold border-b border-electricblue/20 pb-2">Simulator Settings</p>
+                            <div>
+                                <label class="block text-[11px] uppercase text-iceblue/70 mb-1">Target Sales Price ($)</label>
+                                <input id="sim-sales-price" type="number" value="18" class="w-full bg-slateblack border border-electricblue/30 text-white px-3 py-2 text-sm focus:outline-none focus:border-cyanaccent">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] uppercase text-iceblue/70 mb-1">Raw Ingredient Cost ($)</label>
+                                <input id="sim-raw-cost" type="number" value="6.5" class="w-full bg-slateblack border border-electricblue/30 text-white px-3 py-2 text-sm focus:outline-none focus:border-cyanaccent">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] uppercase text-iceblue/70 mb-1">Estimated Plate Waste / Prep Variance (%)</label>
+                                <input id="sim-prep-waste" type="number" value="12" class="w-full bg-slateblack border border-electricblue/30 text-white px-3 py-2 text-sm focus:outline-none focus:border-cyanaccent">
+                            </div>
+                        </div>
+
+                        <!-- Outputs -->
+                        <div class="p-6 bg-slateblack/80 border border-electricblue/20 space-y-4">
+                            <p class="text-xs uppercase tracking-wider text-cyanaccent font-semibold border-b border-electricblue/20 pb-2 text-center">Engineered Output</p>
+                            
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div class="bg-blueblack p-3 border border-electricblue/10">
+                                    <p class="text-[10px] uppercase text-iceblue/50">Raw Cost %</p>
+                                    <p id="out-raw-pct" class="text-lg font-serif text-cyanaccent font-bold">36.1%</p>
+                                </div>
+                                <div class="bg-blueblack p-3 border border-electricblue/10">
+                                    <p class="text-[10px] uppercase text-iceblue/50">Effective Cost %</p>
+                                    <p id="out-eff-pct" class="text-lg font-serif text-dangerred font-bold">40.4%</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-blueblack/50 p-4 border-l-2 border-cyanaccent">
+                                <p class="text-[11px] uppercase tracking-wide text-cyanaccent font-bold">The Holistic Fix:</p>
+                                <p class="text-[11px] text-iceblue/80 leading-relaxed font-light mt-1">
+                                    Applying recipe scaling, weight standardizations and menu visual grouping can reduce this to a profitable <span class="text-electricblue font-bold">28.5% cost ratio</span>, saving you <span id="out-yearly-savings" class="text-cyanaccent font-bold">$12,300</span> yearly on just this single item.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PAGE 2: DETAILED SERVICES VIEW -->
+        <section id="page-services" class="page-transition hidden py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                <!-- Header -->
+                <div class="mb-16 text-center lg:text-left">
+                    <p class="text-xs uppercase tracking-[0.3em] text-electricblue font-semibold mb-2">Service Portfolio</p>
+                    <h2 class="font-serif text-4xl lg:text-5xl text-white">Structured Solutions & Blueprints</h2>
+                    <p class="text-iceblue/70 mt-4 text-base max-w-2xl font-light">
+                        We don't offer generalized advice. We build operational blueprints, financial models, and service systems tailored directly to your food service parameters.
+                    </p>
+                </div>
+
+                <!-- Grid of Extensive Services -->
+                <div class="space-y-16">
+                    <!-- Service Unit 1 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-cardbg p-8 border border-electricblue/10">
+                        <div class="lg:col-span-4 space-y-4">
+                            <span class="text-xs font-mono text-cyanaccent">01 / BRAND BLUEPRINTING</span>
+                            <h3 class="font-serif text-2xl text-white">New Café & Restaurant Launches</h3>
+                            <p class="text-xs text-iceblue/70 leading-relaxed font-light">
+                                Launching a modern food concept requires synchronizing real estate, legal permissions, layout, visual flow, and kitchen operations. We craft the physical and operational blueprint.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 bg-blueblack border border-electricblue/10">
+                                <h4 class="text-xs uppercase text-electricblue font-semibold mb-2"><i class="fa-solid fa-compass-drafting mr-2"></i>Layout Optimization</h4>
+                                <p class="text-[11px] text-iceblue/60 leading-relaxed font-light">CAD kitchen layout designs, service-to-table station distributions, and raw storage blueprints to speed up culinary prep speeds.</p>
+                            </div>
+                            <div class="p-4 bg-blueblack border border-electricblue/10">
+                                <h4 class="text-xs uppercase text-electricblue font-semibold mb-2"><i class="fa-solid fa-list-check mr-2"></i>Pre-Opening Timelines</h4>
+                                <p class="text-[11px] text-iceblue/60 leading-relaxed font-light">Strategic Gantt milestones, equipment selection guides, standard regulatory alignment matrices, and mock stress-testing before launch.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Unit 2 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-cardbg p-8 border border-electricblue/10">
+                        <div class="lg:col-span-4 space-y-4">
+                            <span class="text-xs font-mono text-cyanaccent">02 / COST & PROFIT ENGINEERING</span>
+                            <h3 class="font-serif text-2xl text-white">Financial Engineering</h3>
+                            <p class="text-xs text-iceblue/70 leading-relaxed font-light">
+                                Profitability is engineered down to the gram. We design the sheets, tools, and visual frameworks to track every ounce of margin.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 bg-blueblack border border-electricblue/10">
+                                <h4 class="text-xs uppercase text-electricblue font-semibold mb-2"><i class="fa-solid fa-calculator mr-2"></i>Actual vs Theoretical</h4>
+                                <p class="text-[11px] text-iceblue/60 leading-relaxed font-light">Deploying yield sheets, item waste protocols, scale logs, and POS tracking routines that isolate exact points of margin loss.</p>
+                            </div>
+                            <div class="p-4 bg-blueblack border border-electricblue/10">
+                                <h4 class="text-xs uppercase text-electricblue font-semibold mb-2"><i class="fa-solid fa-people-carry-box mr-2"></i>Labor Matrix Structuring</h4>
+                                <p class="text-[11px] text-iceblue/60 leading-relaxed font-light">Hourly schedule blueprints, cross-training matrix models, and performance-incentive templates to lower labor expenditures.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Unit 3 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-cardbg p-8 border border-electricblue/10">
+                        <div class="lg:col-span-4 space-y-4">
+                            <span class="text-xs font-mono text-cyanaccent">03 / MENU ENGINEERING</span>
+                            <h3 class="font-serif text-2xl text-white">Menu Engineering & Styling</h3>
+                            <p class="text-xs text-iceblue/70 leading-relaxed font-light">
+                                A great menu is a psychological road map. We design item positions and margins to direct guest choices toward your top-tier profit producers.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 bg-blueblack border border-electricblue/10">
+                                <h4 class="text-xs uppercase text-electricblue font-semibold mb-2"><i class="fa-solid fa-kitchen-set mr-2"></i>Recipe Standardization</h4>
+                                <p class="text-[11px] text-iceblue/60 leading-relaxed font-light">We standardize preparation routines, ingredient weights, allergen metrics, and step-by-step plating graphics.</p>
+                            </div>
+                            <div class="p-4 bg-blueblack border border-electricblue/10">
+                                <h4 class="text-xs uppercase text-electricblue font-semibold mb-2"><i class="fa-solid fa-eye mr-2"></i>Psychological Menu Design</h4>
+                                <p class="text-[11px] text-iceblue/60 leading-relaxed font-light">Custom typographic hierarchy, placement positioning, box visual framing, and copywriting to raise your average guest check value.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Quote -->
+                <div class="mt-16 text-center border-t border-electricblue/20 pt-12 max-w-4xl mx-auto">
+                    <p class="font-serif text-xl italic text-iceblue/90">
+                        "Holistic hospitality means recognizing that your menu fails without staff excellence, and your staff fails without strict visual cost systems. The system is the solution."
+                    </p>
+                    <p class="text-xs uppercase tracking-widest text-electricblue font-bold mt-4">— HOLISTIC CONSULTING OPERATIONS MANUAL</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2.5: PHOTO GALLERY SECTION -->
+        <section id="page-gallery" class="page-transition hidden py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                <!-- Header -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.3em] text-electricblue font-semibold mb-2">Event Stories & Live Showcase</p>
+                        <h2 class="font-serif text-4xl lg:text-5xl text-white">Operational Gallery</h2>
+                        <p class="text-iceblue/70 mt-3 text-sm max-w-xl font-light">
+                            Visual diary of culinary launches, workshop classes, kitchen optimization runs, and key design transformations. [Our active operational movement photos]
+                        </p>
+                    </div>
+                    <button onclick="toggleStoryModal(true)" class="mt-6 lg:mt-0 px-6 py-3 bg-electricblue text-white font-bold text-xs uppercase tracking-widest hover:bg-cyanaccent hover:text-blueblack transition-all blue-glow">
+                        <i class="fa-solid fa-plus mr-2"></i>Post New Event Story
+                    </button>
+                </div>
+
+                <!-- Reference Image Inspiration Box -->
+                <div class="mb-12 bg-slateblack border border-electricblue/20 p-6 flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/3 aspect-[4/5] rounded overflow-hidden max-h-[300px]">
+                        <img src="image_16c362.jpg" alt="Corporate Team & Event Inspiration" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500" onerror="this.src='https://placehold.co/400x500/0d1527/0066ff?text=B2B+Launch+Inspiration'">
+                    </div>
+                    <div class="w-full md:w-2/3 space-y-4">
+                        <span class="text-xs uppercase font-mono text-cyanaccent px-2 py-1 bg-cyanaccent/10 border border-cyanaccent/30">Layout Blueprint Standard (image_16c362.jpg)</span>
+                        <h3 class="font-serif text-2xl text-white">Event Organizing & Standard Blueprints</h3>
+                        <p class="text-xs text-iceblue/80 leading-relaxed font-light">
+                            This featured reference showcase (<span class="text-electricblue font-semibold font-mono">image_16c362.jpg</span>) outlines our strategic framework for staff team-building, restaurant training milestones, and B2B organizational consulting events.
+                        </p>
+                        <p class="text-xs text-iceblue/60 leading-relaxed font-light">
+                            We organize regular physical seminars, layout feedback sessions, and corporate team integration drills to bridge administrative vision with fine-dining BOH/FOH synchronization.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Gallery Cards Grid -->
+                <div id="event-gallery-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Cards are rendered dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: CASE STUDIES & RESULTS VIEW -->
+        <section id="page-proof" class="page-transition hidden py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                <!-- Header -->
+                <div class="mb-16 text-center">
+                    <p class="text-xs uppercase tracking-[0.3em] text-electricblue font-semibold mb-2">The Real World Evidence</p>
+                    <h2 class="font-serif text-4xl lg:text-5xl text-white">Before & After Case Breakdowns</h2>
+                    <p class="text-iceblue/70 mt-4 text-base max-w-xl mx-auto font-light">
+                        We don't rely on reviews; we rely on balance sheets. Explore these detailed audit records from past operational assignments.
+                    </p>
+                </div>
+
+                <!-- Case Studies Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Project 1 -->
+                    <div class="border border-electricblue/15 bg-cardbg p-8 space-y-6">
+                        <div class="flex justify-between items-start border-b border-electricblue/10 pb-4">
+                            <div>
+                                <span class="text-xs text-cyanaccent uppercase tracking-wider font-mono">Case Audit #302</span>
+                                <h3 class="font-serif text-2xl text-white mt-1">The Coffee House Turnaround</h3>
+                            </div>
+                            <span class="px-3 py-1 bg-successgreen/20 border border-successgreen text-[10px] uppercase font-bold text-white">Success Outcome</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <p class="text-xs text-iceblue/80 font-light leading-relaxed">
+                                A high-volume specialty café with a 42% cost structure and severe staff turnover, leading to erratic scheduling and guest complaints.
+                            </p>
+                            
+                            <!-- Detailed Metrics Matrix -->
+                            <div class="grid grid-cols-3 gap-4 border-t border-b border-electricblue/10 py-4">
+                                <div>
+                                    <p class="text-[10px] uppercase text-iceblue/50">Core Challenge</p>
+                                    <p class="text-sm font-semibold text-dangerred">42% Prime Cost</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase text-iceblue/50">Intervention</p>
+                                    <p class="text-sm font-semibold text-electricblue">Recipe Scale / SOPs</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase text-iceblue/50">Final Metric</p>
+                                    <p class="text-sm font-semibold text-successgreen">28% Cost (60 Days)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blueblack/50 p-4 border-l border-electricblue text-xs text-iceblue/70 leading-relaxed font-light">
+                            <strong>Holistic Strategy:</strong> We restructured recipe cards to weight-only values, designed custom waste-tracking logs, and restructured walk-paths so 3 staff members could run transactions during peak rushes instead of 5.
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="border border-electricblue/15 bg-cardbg p-8 space-y-6">
+                        <div class="flex justify-between items-start border-b border-electricblue/10 pb-4">
+                            <div>
+                                <span class="text-xs text-cyanaccent uppercase tracking-wider font-mono">Case Audit #411</span>
+                                <h3 class="font-serif text-2xl text-white mt-1">Burgerizza Concept Launch</h3>
+                            </div>
+                            <span class="px-3 py-1 bg-successgreen/20 border border-successgreen text-[10px] uppercase font-bold text-white">Success Outcome</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <p class="text-xs text-iceblue/80 font-light leading-relaxed">
+                                An ambitious fast-casual concept with an unorganized pre-opening checklist and no systematized menu cost projections before renting.
+                            </p>
+                            
+                            <!-- Detailed Metrics Matrix -->
+                            <div class="grid grid-cols-3 gap-4 border-t border-b border-electricblue/10 py-4">
+                                <div>
+                                    <p class="text-[10px] uppercase text-iceblue/50">Core Challenge</p>
+                                    <p class="text-sm font-semibold text-dangerred">Project Delay / 0 SOPs</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase text-iceblue/50">Intervention</p>
+                                    <p class="text-sm font-semibold text-electricblue">Critical Path Blueprint</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase text-iceblue/50">Final Metric</p>
+                                    <p class="text-sm font-semibold text-successgreen">On-Time Launch</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blueblack/50 p-4 border-l border-electricblue text-xs text-iceblue/70 leading-relaxed font-light">
+                            <strong>Holistic Strategy:</strong> We standardized portion-control protocols, built a vendor onboarding matrix, organized kitchen paths, and launched training cycles that got BOH food turnaround below 6 minutes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: ABOUT & PHILOSOPHY VIEW -->
+        <section id="page-about" class="page-transition hidden py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+                    <!-- Column 1: Portrait / Graphic -->
+                    <div class="lg:col-span-5">
+                        <div class="relative max-w-md mx-auto border border-electricblue/30 p-4 bg-slateblack">
+                            <div class="aspect-square overflow-hidden bg-blueblack">
+                                <img src="https://placehold.co/600x600/050b14/0066FF?text=Consultants+Movement+Audit" class="w-full h-full object-cover grayscale" alt="F&B Operation Specialist Portrait" />
+                            </div>
+                            <div class="mt-4 text-center">
+                                <p class="font-serif text-lg text-electricblue">Shiferaw H/Melekot & Ayele Mitiku</p>
+                                <p class="text-[10px] uppercase tracking-wider text-iceblue/50 font-mono">Lead Hospitality Consultants & Auditors</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Philosophy details -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-xs uppercase tracking-[0.2em] text-electricblue font-mono">Inside the Operation</span>
+                        <h2 class="font-serif text-4xl text-white">Elite Systematization for Food Service Ventures</h2>
+                        <p class="text-iceblue/80 text-sm leading-relaxed font-light">
+                            We believe that beautiful food ventures succeed or fail based on standard operating logic, not just excellent menu concepts. Excellent recipes without scale matrices fail; skilled staff without structured station plans burn out.
+                        </p>
+                        
+                        <div class="space-y-4 pt-4 border-t border-electricblue/15">
+                            <div class="flex gap-4">
+                                <span class="text-electricblue font-serif text-lg font-bold">01 /</span>
+                                <div>
+                                    <h4 class="font-serif text-base text-white">The Unified System</h4>
+                                    <p class="text-xs text-iceblue/60 mt-1 font-light leading-relaxed">
+                                        We audit every touchpoint: kitchen pathways, storage logistics, food pricing, menu design, and FOH/BOH employee communication.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="text-electricblue font-serif text-lg font-bold">02 /</span>
+                                <div>
+                                    <h4 class="font-serif text-base text-white">Operational Discipline</h4>
+                                    <p class="text-xs text-iceblue/60 mt-1 font-light leading-relaxed">
+                                        We avoid generic advice. We install practical spreadsheets, custom scales, yield tests, and checklists that your teams can master immediately.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Section directly inspired by image_16c362.jpg layout -->
+                <div class="pt-12 border-t border-electricblue/10">
+                    <div class="text-center mb-12">
+                        <h3 class="font-serif text-3xl text-white mb-2">Meet Our Advisory Team</h3>
+                        <p class="text-xs text-iceblue/60">Expert strategists driving menu cost engineering and structural turnaround blueprints. [Our Active Operations & Movements]</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-6 bg-slateblack border border-electricblue/10 text-center">
+                            <img src="https://placehold.co/150x150/050b14/0066FF?text=Advisory+Team+Movement" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-electricblue p-1 object-cover">
+                            <h4 class="font-serif text-lg text-white">Shiferaw H/Melekot & Ayele Mitiku</h4>
+                            <p class="text-[10px] text-cyanaccent uppercase tracking-wider font-mono">Lead Hospitality Consultants & Auditors</p>
+                            <div class="flex justify-center gap-3 mt-3 text-xs text-iceblue/50">
+                                <a href="https://linkedin.com" class="hover:text-electricblue"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="mailto:ayelemitiku793@gmail.com" class="hover:text-electricblue"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-slateblack border border-electricblue/10 text-center">
+                            <img src="https://placehold.co/150x150/050b14/00E5FF?text=Ayele+M" onerror="this.src='https://placehold.co/150x150/050b14/0066FF?text=Menu+Pricing+Movement'" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-electricblue p-1 object-cover">
+                            <h4 class="font-serif text-lg text-white">Ayele M</h4>
+                            <p class="text-[10px] text-cyanaccent uppercase tracking-wider font-mono">Menu Pricing Coordinator</p>
+                            <div class="flex justify-center gap-3 mt-3 text-xs text-iceblue/50">
+                                <a href="https://linkedin.com" class="hover:text-electricblue"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://telegram.org" class="hover:text-electricblue"><i class="fa-brands fa-telegram"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-slateblack border border-electricblue/10 text-center">
+                            <img src="image_0b87dd.jpg" onerror="this.src='https://placehold.co/150x150/050b14/0066FF?text=Shiferaw+HM'" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-electricblue p-1 object-cover">
+                            <h4 class="font-serif text-lg text-white">Shiferaw H/M</h4>
+                            <p class="text-[10px] text-cyanaccent uppercase tracking-wider font-mono">Operations SOP Director</p>
+                            <div class="flex justify-center gap-3 mt-3 text-xs text-iceblue/50">
+                                <a href="https://linkedin.com" class="hover:text-electricblue"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://t.me/shifex17/s/16" target="_blank" class="hover:text-electricblue"><i class="fa-brands fa-telegram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PAGE 5: CONTACT & ASSESSMENT INTAKE VIEW -->
+        <section id="page-contact" class="page-transition hidden py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Column 1: Details -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="text-xs uppercase tracking-[0.2em] text-electricblue font-mono">Partner With Us</span>
+                        <h2 class="font-serif text-4xl text-white">Initiate Your Operational Audit</h2>
+                        <p class="text-iceblue/80 text-sm leading-relaxed font-light">
+                            Stressed operations, unorganized launches, or bleeding food margins? Fill out this brief screening form. We use these details to prepare custom analytical data before our discovery call.
+                        </p>
+
+                        <!-- Contact Direct details -->
+                        <div class="space-y-4 pt-6 border-t border-electricblue/15">
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="w-8 h-8 border border-electricblue/20 flex items-center justify-center text-electricblue"><i class="fa-solid fa-envelope"></i></span>
+                                <span class="text-iceblue/70 font-mono">ayelemitiku793@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="w-8 h-8 border border-electricblue/20 flex items-center justify-center text-electricblue"><i class="fa-solid fa-phone"></i></span>
+                                <span class="text-iceblue/70 font-mono">0945541051 / 0946333504</span>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Gateway (Requested) -->
+                        <div class="pt-6 border-t border-electricblue/15 space-y-3">
+                            <p class="text-xs font-mono uppercase text-electricblue">Our Live Networks</p>
+                            <div class="flex gap-4">
+                                <a href="https://instagram.com" target="_blank" class="px-4 py-2.5 bg-slateblack border border-electricblue/20 hover:border-cyanaccent text-iceblue hover:text-cyanaccent transition flex items-center gap-2 text-xs">
+                                    <i class="fa-brands fa-instagram text-base"></i> Instagram
+                                </a>
+                                <a href="https://telegram.org" target="_blank" class="px-4 py-2.5 bg-slateblack border border-electricblue/20 hover:border-cyanaccent text-iceblue hover:text-cyanaccent transition flex items-center gap-2 text-xs">
+                                    <i class="fa-brands fa-telegram text-base"></i> Telegram
+                                </a>
+                                <a href="https://linkedin.com" target="_blank" class="px-4 py-2.5 bg-slateblack border border-electricblue/20 hover:border-cyanaccent text-iceblue hover:text-cyanaccent transition flex items-center gap-2 text-xs">
+                                    <i class="fa-brands fa-linkedin text-base"></i> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Lead Intake Form -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-cardbg border border-electricblue/20 p-8">
+                            <h3 class="font-serif text-xl text-electricblue mb-6 pb-2 border-b border-electricblue/15">Operational Intake Form</h3>
+                            
+                            <form id="intake-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Your Full Name</label>
+                                        <input type="text" id="form-fullname" required class="w-full bg-slateblack border border-electricblue/20 text-white px-4 py-3 text-xs focus:outline-none focus:border-cyanaccent" placeholder="John Doe">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Business / Brand Name</label>
+                                        <input type="text" id="form-brandname" required class="w-full bg-slateblack border border-electricblue/20 text-white px-4 py-3 text-xs focus:outline-none focus:border-cyanaccent" placeholder="Venture Café">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Corporate Email Address</label>
+                                        <input type="email" id="form-email" required class="w-full bg-slateblack border border-electricblue/20 text-white px-4 py-3 text-xs focus:outline-none focus:border-cyanaccent" placeholder="john@venturecafe.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Primary Operational Challenge</label>
+                                        <select id="form-challenge" required class="w-full bg-slateblack border border-electricblue/20 text-white px-4 py-3 text-xs focus:outline-none focus:border-cyanaccent">
+                                            <option value="" class="bg-slateblack">-- Please Select --</option>
+                                            <option value="high-food-cost" class="bg-slateblack">Bleeding Food & Beverage Cost Margins</option>
+                                            <option value="concept-blueprint" class="bg-slateblack">Planning a New Café / Restaurant Concept Launch</option>
+                                            <option value="staff-turnover" class="bg-slateblack">High Staff Turnover & Unorganized SOPs</option>
+                                            <option value="menu-rebuild" class="bg-slateblack">Underperforming Menu Visuals & Yield Problems</option>
+                                            <option value="full-audit" class="bg-slateblack">Complete System Operational Restructure</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Current Venture Stage</label>
+                                        <select id="form-stage" required class="w-full bg-slateblack border border-electricblue/20 text-white px-4 py-3 text-xs focus:outline-none focus:border-cyanaccent">
+                                            <option value="" class="bg-slateblack">-- Please Select --</option>
+                                            <option value="pre-opening" class="bg-slateblack">Pre-Opening (Planning Phase)</option>
+                                            <option value="recently-launched" class="bg-slateblack">Recently Launched (&lt; 1 Year)</option>
+                                            <option value="established" class="bg-slateblack">Established Operational Business</option>
+                                            <option value="expanding" class="bg-slateblack">Expanding to Multiple Locations</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Venture Scale (Est. Seating Capacity)</label>
+                                        <select id="form-scale" required class="w-full bg-slateblack border border-electricblue/20 text-white px-4 py-3 text-xs focus:outline-none focus:border-cyanaccent">
+                                            <option value="" class="bg-slateblack">-- Please Select --</option>
+                                            <option value="small" class="bg-slateblack">Boutique Concept (&lt; 40 seats)</option>
+                                            <option value="mid" class="bg-slateblack">Mid-Sized (40 - 120 seats)</option>
+                                            <option value="large" class="bg-slateblack">High-Capacity Venue (120+ seats)</option>
+                                            <option value="ghost-kitchen" class="bg-slateblack">Delivery Focused / Ghost Kitchen Model</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Additional Operational Details</label>
+                                    <textarea id="form-details" rows="4" class="w-full bg-slateblack border border-electricblue/20 text-white p-4 text-xs focus:outline-none focus:border-cyanaccent" placeholder="Please list average F&B costs, launch targets, or visual bottlenecks..."></textarea>
+                                </div>
+
+                                <!-- Custom Alert Box inside rather than system alert -->
+                                <div id="form-alert" class="hidden p-4 bg-successgreen/20 border border-successgreen text-white text-xs">
+                                    Your information has been logged securely inside our operations pipeline. We will follow up with custom diagnostic data within 24 hours.
+                                </div>
+
+                                <button type="submit" class="w-full py-4 bg-electricblue text-white font-bold text-xs uppercase tracking-widest hover:bg-cyanaccent hover:text-blueblack transition-all duration-300 blue-glow">
+                                    Submit Application & Book Call
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: ADMIN VIEW (RESTRICTED AUDITING PORTAL) -->
+        <section id="page-admin" class="page-transition hidden py-8 lg:py-16">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16">
+                
+                <!-- SECURE PASSCODE GATE OVERLAY -->
+                <div id="admin-lock-screen" class="max-w-md mx-auto bg-slateblack border border-electricblue/30 p-8 text-center space-y-6 my-12">
+                    <div class="w-16 h-16 rounded-full bg-electricblue/10 border border-electricblue/30 flex items-center justify-center mx-auto text-electricblue">
+                        <i class="fa-solid fa-shield-halved text-2xl animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-white">System Owner Verification</h3>
+                        <p class="text-xs text-iceblue/60 mt-2">Access to view customer intake requisitions is restricted. Enter your security passcode below.</p>
+                    </div>
+                    
+                    <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-iceblue/60 mb-2 font-semibold">Security Passcode</label>
+                            <input type="password" id="admin-passcode-input" required class="w-full bg-blueblack border border-electricblue/20 text-white text-center px-4 py-3 text-sm tracking-widest focus:outline-none focus:border-cyanaccent placeholder-iceblue/20" placeholder="••••••••">
+                        </div>
+                        <div id="admin-login-error" class="hidden text-xs text-dangerred bg-dangerred/15 border border-dangerred/30 p-2 text-center">
+                            Invalid passcode. Access denied.
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-electricblue hover:bg-cyanaccent hover:text-blueblack text-white font-bold text-xs uppercase tracking-widest transition-all">
+                            Verify Identity
+                        </button>
+                    </form>
+                    <p class="text-[10px] text-iceblue/40 uppercase font-mono">Owner Gateway • Holistic Consulting</p>
+                </div>
+
+                <!-- SECURE WORKSPACE (HIDDEN BY DEFAULT) -->
+                <div id="admin-secured-workspace" class="hidden">
+                    <!-- Portal Title -->
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-electricblue/20">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-0.5 bg-successgreen/20 text-successgreen border border-successgreen/40 text-[9px] uppercase font-mono tracking-widest">Authorized Owner Mode</span>
+                                <span id="current-user-badge" class="text-[10px] font-mono text-iceblue/50">Simulated Pipeline</span>
+                            </div>
+                            <h2 class="font-serif text-3xl lg:text-4xl text-white">Consultation Intake Dashboard</h2>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex gap-3">
+                            <button onclick="resetSimulatedData()" class="px-4 py-2 bg-blueblack border border-electricblue/30 text-electricblue text-xs uppercase tracking-wider hover:bg-electricblue hover:text-white transition">
+                                Reset Demo Data
+                            </button>
+                            <button onclick="lockAdminConsole()" class="px-4 py-2 bg-dangerred/20 border border-dangerred/40 text-dangerred text-xs uppercase tracking-wider hover:bg-dangerred hover:text-white transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-lock"></i> Lock Console
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                        <div class="bg-cardbg border border-electricblue/15 p-5">
+                            <p class="text-xs text-iceblue/50 uppercase tracking-widest">Total Inquiries</p>
+                            <p id="admin-stat-total" class="font-serif text-3xl font-bold text-electricblue mt-2">0</p>
+                        </div>
+                        <div class="bg-cardbg border border-electricblue/15 p-5">
+                            <p class="text-xs text-iceblue/50 uppercase tracking-widest">New Requests</p>
+                            <p id="admin-stat-new" class="font-serif text-3xl font-bold text-amber-500 mt-2">0</p>
+                        </div>
+                        <div class="bg-cardbg border border-electricblue/15 p-5">
+                            <p class="text-xs text-iceblue/50 uppercase tracking-widest">Active Audit Reviews</p>
+                            <p id="admin-stat-review" class="font-serif text-3xl font-bold text-cyanaccent mt-2">0</p>
+                        </div>
+                        <div class="bg-cardbg border border-electricblue/15 p-5">
+                            <p class="text-xs text-iceblue/50 uppercase tracking-widest">Operational Success Rate</p>
+                            <p class="font-serif text-3xl font-bold text-successgreen mt-2">94.2%</p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Split Grid: Master and Detail view -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        
+                        <!-- Left: Master Intake Records List -->
+                        <div class="lg:col-span-7 bg-cardbg border border-electricblue/10 p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4 pb-2 border-b border-electricblue/10">
+                                    <h3 class="text-sm font-semibold uppercase tracking-widest text-electricblue"><i class="fa-solid fa-list-ol mr-2"></i>Lead Database</h3>
+                                    <div class="text-xs text-iceblue/40">Select a record to audit or communicate</div>
+                                </div>
+                                
+                                <!-- Search & Filtration -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                                    <input type="text" id="admin-search-input" oninput="filterRecords()" placeholder="Search Name or Brand..." class="bg-blueblack border border-electricblue/20 text-xs text-iceblue px-3 py-2 w-full focus:outline-none focus:border-cyanaccent">
+                                    <select id="admin-filter-challenge" onchange="filterRecords()" class="bg-blueblack border border-electricblue/20 text-xs text-iceblue px-3 py-2 w-full focus:outline-none focus:border-cyanaccent">
+                                        <option value="all" class="bg-slateblack">All Challenges</option>
+                                        <option value="high-food-cost" class="bg-slateblack">Bleeding Food Costs</option>
+                                        <option value="concept-blueprint" class="bg-slateblack">New Concept Launch</option>
+                                        <option value="staff-turnover" class="bg-slateblack">High Staff Turnover</option>
+                                        <option value="menu-rebuild" class="bg-slateblack">Menu Underperformance</option>
+                                        <option value="full-audit" class="bg-slateblack">Complete System Restructure</option>
+                                    </select>
+                                </div>
+
+                                <!-- List Box Container -->
+                                <div id="admin-records-list" class="space-y-3 max-h-[480px] overflow-y-auto pr-2">
+                                    <!-- Dynamically Rendered Intake Rows Go Here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Audit Detail & Correspondence Console -->
+                        <div class="lg:col-span-5 bg-cardbg border border-electricblue/25 p-6">
+                            <div id="admin-detail-placeholder" class="h-full flex flex-col justify-center items-center py-20 text-center">
+                                <i class="fa-solid fa-folder-open text-electricblue/25 text-5xl mb-4"></i>
+                                <h4 class="font-serif text-lg text-iceblue/80">No Record Selected</h4>
+                                <p class="text-xs text-iceblue/50 max-w-xs mt-2">Choose an incoming inquiry from the ledger to load comprehensive data details, log phone conversations, and coordinate responses.</p>
+                            </div>
+
+                            <div id="admin-detail-card" class="hidden flex flex-col h-full justify-between space-y-6">
+                                <!-- Detail Header -->
+                                <div class="border-b border-electricblue/15 pb-4">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 id="detail-brand" class="font-serif text-2xl text-electricblue">Restaurant Venture</h3>
+                                            <p id="detail-owner" class="text-xs text-iceblue/70 mt-1">Lead: John Smith</p>
+                                        </div>
+                                        <select id="detail-status-select" onchange="updateRecordStatus()" class="bg-blueblack text-[11px] font-bold tracking-wider uppercase border border-electricblue text-electricblue px-2 py-1 focus:outline-none">
+                                            <option value="new">New Inquiry</option>
+                                            <option value="review">In Review</option>
+                                            <option value="contacted">Contacted</option>
+                                            <option value="completed">Completed</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Operational Specs Grid -->
+                                <div class="grid grid-cols-2 gap-4 bg-blueblack/45 p-4 border border-electricblue/10">
+                                    <div>
+                                        <p class="text-[9px] uppercase tracking-wider text-iceblue/40">Venture Stage</p>
+                                        <p id="detail-stage" class="text-xs font-semibold text-iceblue/80">Established</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] uppercase tracking-wider text-iceblue/40">Capacity Scale</p>
+                                        <p id="detail-scale" class="text-xs font-semibold text-iceblue/80">Mid-Sized</p>
+                                    </div>
+                                    <div class="col-span-2 pt-2 border-t border-electricblue/5">
+                                        <p class="text-[9px] uppercase tracking-wider text-iceblue/40">Operational Challenge</p>
+                                        <p id="detail-challenge" class="text-xs font-semibold text-cyanaccent">Bleeding Cost Margins</p>
+                                    </div>
+                                </div>
+
+                                <!-- User Notes Box -->
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-wider text-electricblue font-semibold mb-2">Original Client Message:</p>
+                                    <div id="detail-notes" class="bg-blueblack/80 p-3 text-xs text-iceblue/80 max-h-[100px] overflow-y-auto italic font-light border-l border-cyanaccent/50">
+                                        "No comments."
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Communication Logs -->
+                                <div class="border-t border-electricblue/15 pt-4">
+                                    <p class="text-[10px] uppercase tracking-wider text-electricblue font-semibold mb-2"><i class="fa-solid fa-comments mr-1"></i>Communication & Audit Logs:</p>
+                                    <div id="detail-logs-list" class="space-y-2 max-h-[140px] overflow-y-auto pr-2 mb-4 text-xs">
+                                        <!-- Log rows rendered dynamic -->
+                                    </div>
+
+                                    <!-- Action Console Input -->
+                                    <div class="space-y-2">
+                                        <label class="block text-[9px] uppercase tracking-wider text-iceblue/50">Log Contact Event / Note:</label>
+                                        <div class="flex gap-2">
+                                            <input type="text" id="admin-log-input" placeholder="e.g. Sent introductory analysis email..." class="flex-grow bg-blueblack border border-electricblue/20 text-xs px-3 py-2 text-iceblue focus:outline-none focus:border-cyanaccent">
+                                            <button onclick="addCommunicationLog()" class="bg-electricblue text-white px-4 py-2 font-bold uppercase tracking-wider text-[10px] hover:bg-cyanaccent hover:text-blueblack transition-all">
+                                                Log Event
+                                            </button>
+                                        </div>
+                                        <div class="flex flex-wrap gap-1.5 pt-1">
+                                            <button onclick="quickLog('Called client, scheduled audit call')" class="bg-blueblack border border-electricblue/20 px-2 py-0.5 text-[9px] text-iceblue/60 hover:text-cyanaccent transition">Quick Call Log</button>
+                                            <button onclick="quickLog('Custom costing proposal delivered')" class="bg-blueblack border border-electricblue/20 px-2 py-0.5 text-[9px] text-iceblue/60 hover:text-cyanaccent transition">Quick Proposal Log</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Direct Email Gateway -->
+                                <div class="border-t border-electricblue/15 pt-4 flex items-center justify-between">
+                                    <div class="text-[11px] font-mono text-iceblue/60">
+                                        Gateway: <span id="detail-email" class="text-cyanaccent">owner@brand.com</span>
+                                    </div>
+                                    <a id="detail-email-btn" href="#" class="px-3 py-1.5 bg-electricblue/10 border border-electricblue/30 text-cyanaccent text-[10px] font-bold uppercase tracking-widest hover:bg-electricblue hover:text-white transition-all">
+                                        <i class="fa-solid fa-paper-plane mr-1.5"></i>Compose Email
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Create Story Popup Modal -->
+    <div id="story-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-blueblack/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="relative w-full max-w-lg bg-cardbg border border-electricblue/30 p-6 shadow-2xl">
+            <button onclick="toggleStoryModal(false)" class="absolute top-4 right-4 text-iceblue/50 hover:text-electricblue transition text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="font-serif text-2xl text-white mb-4 pb-2 border-b border-electricblue/20">Post New Event Story</h3>
+            
+            <form id="story-form" onsubmit="handleStorySubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] uppercase text-iceblue/60 mb-1">Story Title</label>
+                    <input type="text" id="story-title" required class="w-full bg-blueblack border border-electricblue/20 text-white px-3 py-2 text-xs focus:outline-none focus:border-cyanaccent" placeholder="e.g. Alabaster Café Kickoff Workshop">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase text-iceblue/60 mb-1">Event Category</label>
+                    <select id="story-category" required class="w-full bg-blueblack border border-electricblue/20 text-white px-3 py-2 text-xs focus:outline-none focus:border-cyanaccent">
+                        <option value="Launch" class="bg-slateblack">Launch Event</option>
+                        <option value="Workshop" class="bg-slateblack">Staff Workshop</option>
+                        <option value="Audit" class="bg-slateblack">Operational Audit</option>
+                        <option value="Design" class="bg-slateblack">Sensory Layout Design</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase text-iceblue/60 mb-1">Story Date</label>
+                    <input type="date" id="story-date" required class="w-full bg-blueblack border border-electricblue/20 text-white px-3 py-2 text-xs focus:outline-none focus:border-cyanaccent">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase text-iceblue/60 mb-1">Story Narrative</label>
+                    <textarea id="story-body" rows="4" required class="w-full bg-blueblack border border-electricblue/20 text-white p-3 text-xs focus:outline-none focus:border-cyanaccent" placeholder="Tell the narrative of the layout restructuring or operational achievement..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase text-iceblue/60 mb-1">Simulated Event Photo Placeholder (Image URL)</label>
+                    <input type="text" id="story-image" class="w-full bg-blueblack border border-electricblue/20 text-white px-3 py-2 text-xs focus:outline-none focus:border-cyanaccent" placeholder="Leave empty for premium auto-generation">
+                </div>
+
+                <div class="pt-4 flex gap-3">
+                    <button type="button" onclick="toggleStoryModal(false)" class="flex-1 py-2 border border-electricblue/20 text-iceblue text-xs uppercase tracking-wider hover:bg-slateblack transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 py-2 bg-electricblue text-white font-bold text-xs uppercase tracking-wider hover:bg-cyanaccent hover:text-blueblack transition">
+                        Publish Story
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-slateblack border-t border-electricblue/15 py-12 px-6 lg:px-16 text-xs text-iceblue/60">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Brand Frame -->
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 border border-electricblue/25 flex items-center justify-center bg-white p-0.5">
+                    <img src="hlstk.jpg" alt="Holistic Consulting" class="h-full w-full object-contain" onerror="this.src='https://placehold.co/100x100/ffffff/050b14?text=HC'">
+                </div>
+                <div class="text-left">
+                    <p class="font-serif text-electricblue font-bold tracking-widest text-sm leading-tight">HOLISTIC CONSULTING</p>
+                    <p class="text-[9px] uppercase tracking-[0.2em] text-iceblue/40">F&B Operation Restructuring & Cost Controls</p>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#" onclick="navigateTo('home')" class="hover:text-electricblue transition">Home</a>
+                <a href="#" onclick="navigateTo('services')" class="hover:text-electricblue transition">Solutions</a>
+                <a href="#" onclick="navigateTo('gallery')" class="hover:text-electricblue transition">Gallery & Stories</a>
+                <a href="#" onclick="navigateTo('proof')" class="hover:text-electricblue transition">Results</a>
+                <a href="#" onclick="navigateTo('about')" class="hover:text-electricblue transition">About Philosophy</a>
+                <a href="#" onclick="navigateTo('contact')" class="hover:text-electricblue transition">Contact</a>
+            </div>
+
+            <!-- Social links in footer -->
+            <div class="flex gap-4 text-base text-iceblue/70">
+                <a href="https://instagram.com" target="_blank" class="hover:text-cyanaccent transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://telegram.org" target="_blank" class="hover:text-cyanaccent transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="hover:text-cyanaccent transition"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+
+            <!-- Legal and Copyright -->
+            <div class="text-center md:text-right text-[10px] text-iceblue/40">
+                <p>&copy; 2026 Holistic Consulting. All Rights Reserved.</p>
+                <p class="mt-1 font-mono">Designed for Elite Operational Precision.</p>
+                <p class="mt-0.5 text-electricblue font-semibold">ayelemitiku793@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Module Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, collection, onSnapshot, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Firebase References
+        window.db = null;
+        window.auth = null;
+        window.isFirebaseActive = false;
+
+        // Secure initialization under restricted sandbox guidelines
+        async function initializeBackend() {
+            const hasConfig = typeof __firebase_config !== 'undefined';
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'holistic-consulting-b2b';
+
+            if (hasConfig) {
+                try {
+                    const firebaseConfig = JSON.parse(__firebase_config);
+                    const app = initializeApp(firebaseConfig);
+                    window.db = getFirestore(app);
+                    window.auth = getAuth(app);
+
+                    // Await proper Auth beforehand (RULE 3)
+                    const customToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                    if (customToken) {
+                        await signInWithCustomToken(window.auth, customToken);
+                    } else {
+                        await signInAnonymously(window.auth);
+                    }
+
+                    window.isFirebaseActive = true;
+                    document.getElementById('current-user-badge').textContent = `Auth Connected: ${window.auth.currentUser.uid}`;
+                    
+                    // Setup real-time listeners for public path `/artifacts/{appId}/public/data/intakes` (RULE 1)
+                    setupRealtimeSubscribers(appId);
+                } catch (e) {
+                    console.warn("Firebase Auth setup failed, triggering in-memory sandbox fallbacks.", e);
+                    setupSandboxFallbacks();
+                }
+            } else {
+                setupSandboxFallbacks();
+            }
+        }
+
+        // Setup real-time snapshot sync (RULE 1, 2)
+        function setupRealtimeSubscribers(appId) {
+            const publicIntakeCollection = collection(window.db, 'artifacts', appId, 'public', 'data', 'intakes');
+            
+            // Error handling mandatory callback included
+            onSnapshot(publicIntakeCollection, (snapshot) => {
+                const records = [];
+                snapshot.forEach(doc => {
+                    records.push({ id: doc.id, ...doc.data() });
+                });
+                // Sort inside memory (RULE 2)
+                records.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                window.loadedIntakes = records;
+                renderAdminDashboard();
+            }, (error) => {
+                console.error("Firestore onSnapshot pipeline exception:", error);
+            });
+        }
+
+        function setupSandboxFallbacks() {
+            window.isFirebaseActive = false;
+            // Pre-seed local storage with dummy B2B inquiries for visual client presentation
+            if (!localStorage.getItem('hh_simulated_intakes')) {
+                const sampleRecords = [
+                    {
+                        id: "sim-101",
+                        fullname: "Soren Peterson",
+                        brandname: "Alabaster Artisan Café",
+                        email: "operations@alabastercafe.com",
+                        challenge: "high-food-cost",
+                        stage: "established",
+                        scale: "mid",
+                        details: "Struggling with actual vs theoretical coffee bean variance. Prime costs are hovering at 38% for the past two quarters.",
+                        status: "new",
+                        timestamp: Date.now() - 3600000 * 2,
+                        logs: [
+                            { date: new Date().toLocaleString(), text: "Inquiry registered in lead pipeline." }
+                        ]
+                    },
+                    {
+                        id: "sim-102",
+                        fullname: "Emilia Clarke",
+                        brandname: "Oasis Bistro & Lounge",
+                        email: "emilia@oasisvenues.com",
+                        challenge: "staff-turnover",
+                        stage: "expanding",
+                        scale: "large",
+                        details: "Opening our third location but front-of-house training standards are slipping. Desperately need a standard FOH training SOP framework.",
+                        status: "review",
+                        timestamp: Date.now() - 3600000 * 24,
+                        logs: [
+                            { date: new Date(Date.now() - 3600000 * 12).toLocaleString(), text: "Initial layout blueprint review conducted." }
+                        ]
+                    },
+                    {
+                        id: "sim-103",
+                        fullname: "Chef Marco Pierre",
+                        brandname: "Garamond Dining Room",
+                        email: "marco@garamonddining.com",
+                        challenge: "menu-rebuild",
+                        stage: "pre-opening",
+                        scale: "small",
+                        details: "Developing the launch menu architecture. Need to align standard recipes with visual layout psychology to promote high-margin starters.",
+                        status: "completed",
+                        timestamp: Date.now() - 3600000 * 72,
+                        logs: [
+                            { date: new Date(Date.now() - 3600000 * 48).toLocaleString(), text: "Pre-opening menu costing assessment executed." },
+                            { date: new Date(Date.now() - 3600000 * 12).toLocaleString(), text: "Client accepted optimized layout strategy. Closing ticket." }
+                        ]
+                    }
+                ];
+                localStorage.setItem('hh_simulated_intakes', JSON.stringify(sampleRecords));
+            }
+            
+            // Initial render from local cache
+            window.loadedIntakes = JSON.parse(localStorage.getItem('hh_simulated_intakes'));
+            renderAdminDashboard();
+        }
+
+        // Run setup once window load is complete
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeBackend();
+        });
+    </script>
+
+    <!-- PLATFORM JAVASCRIPT LOGIC -->
+    <script>
+        // Global Local In-Memory Storage
+        window.loadedIntakes = [];
+        window.selectedRecordId = null;
+        
+        // Admin Access Security Configurations
+        window.isAdminAuthenticated = false;
+        const CONFIG_ADMIN_PASSCODE = "ayele793"; // Securely configures Owner Console access
+
+        // Pre-seeded Event Gallery Stories [Representing our operations in movement]
+        window.seededStories = [
+            {
+                id: "story-1",
+                title: "Grand Opening of Alabaster Artisan Café",
+                category: "Launch",
+                date: "2026-05-14",
+                body: "Successfully launched the Alabaster Artisan Café. Executed fully standardized espresso layout charts and BOH operational sequences to ensure smooth high-volume service on day one.",
+                image: "https://placehold.co/600x400/0d1527/0066ff?text=Operational+Movement+Launch"
+            },
+            {
+                id: "story-2",
+                title: "Specialized Menu Engineering Masterclass",
+                category: "Workshop",
+                date: "2026-06-02",
+                body: "Conducted an analytical costing workshop for independent coffee roasters. Taught the fundamental rules of recipe scaling, raw-to-plate weight ratios, and layout psychology.",
+                image: "https://placehold.co/600x400/0d1527/00e5ff?text=Interactive+Costing+Audit"
+            },
+            {
+                id: "story-3",
+                title: "Sensory Light & Spatial Blueprint Audit",
+                category: "Design",
+                date: "2026-06-18",
+                body: "Completed architectural redesign mapping. Verified our custom lighting layout formulas (featured in standard image_18379b.jpg) to optimize customer dining times and check averages.",
+                image: "image_18379b.jpg"
+            }
+        ];
+
+        // Virtual Router / Page Transition Manager
+        function navigateTo(pageId) {
+            const pages = ['home', 'services', 'gallery', 'proof', 'about', 'contact', 'admin'];
+            
+            pages.forEach(p => {
+                const element = document.getElementById(`page-${p}`);
+                if (element) {
+                    if (p === pageId) {
+                        element.classList.remove('hidden');
+                        element.classList.add('block');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        element.classList.remove('block');
+                        element.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Update nav-links active aesthetics
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                const targetText = link.textContent.toLowerCase();
+                if (
+                    (pageId === 'home' && targetText.includes('home')) ||
+                    (pageId === 'services' && targetText.includes('solutions')) ||
+                    (pageId === 'gallery' && targetText.includes('gallery')) ||
+                    (pageId === 'proof' && targetText.includes('the proof')) ||
+                    (pageId === 'about' && targetText.includes('philosophy')) ||
+                    (pageId === 'contact' && targetText.includes('operational')) ||
+                    (pageId === 'admin' && targetText.includes('owner'))
+                ) {
+                    link.classList.remove('text-iceblue/70');
+                    link.classList.add('text-electricblue');
+                } else {
+                    link.classList.remove('text-electricblue');
+                    link.classList.add('text-iceblue/70');
+                }
+            });
+
+            // Auto close mobile dropdown menu
+            document.getElementById('mobile-dropdown').classList.add('hidden');
+
+            if (pageId === 'admin') {
+                evaluateAdminAuthState();
+            }
+            if (pageId === 'gallery') {
+                renderEventGallery();
+            }
+        }
+
+        // Evaluate Authentication screen visibility
+        function evaluateAdminAuthState() {
+            const lockScreen = document.getElementById('admin-lock-screen');
+            const securedWorkspace = document.getElementById('admin-secured-workspace');
+            
+            if (window.isAdminAuthenticated) {
+                lockScreen.classList.add('hidden');
+                securedWorkspace.classList.remove('hidden');
+                renderAdminDashboard();
+            } else {
+                lockScreen.classList.remove('hidden');
+                securedWorkspace.classList.add('hidden');
+                document.getElementById('admin-passcode-input').value = '';
+                document.getElementById('admin-login-error').classList.add('hidden');
+            }
+        }
+
+        // Handle Identity Verification Form submit
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const inputVal = document.getElementById('admin-passcode-input').value;
+            const errorMsg = document.getElementById('admin-login-error');
+
+            if (inputVal === CONFIG_ADMIN_PASSCODE) {
+                window.isAdminAuthenticated = true;
+                errorMsg.classList.add('hidden');
+                evaluateAdminAuthState();
+            } else {
+                window.isAdminAuthenticated = false;
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // Lock workspace console manually
+        function lockAdminConsole() {
+            window.isAdminAuthenticated = false;
+            evaluateAdminAuthState();
+        }
+
+        // Mobile Menu Button Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const dropdown = document.getElementById('mobile-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Interactive Cost-vs-Profit Simulator Mathematics
+        function runCostCalculator() {
+            const salesPrice = parseFloat(document.getElementById('sim-sales-price').value) || 0;
+            const rawCost = parseFloat(document.getElementById('sim-raw-cost').value) || 0;
+            const prepWaste = parseFloat(document.getElementById('sim-prep-waste').value) || 0;
+
+            if (salesPrice <= 0) return;
+
+            const rawCostPct = (rawCost / salesPrice) * 100;
+            const effectiveCost = rawCost * (1 + (prepWaste / 100));
+            const effectiveCostPct = (effectiveCost / salesPrice) * 100;
+
+            document.getElementById('out-raw-pct').textContent = rawCostPct.toFixed(1) + '%';
+            document.getElementById('out-eff-pct').textContent = effectiveCostPct.toFixed(1) + '%';
+
+            const targetIdealCostPct = 28.5;
+            const potentialSavingsPerPlate = Math.max(0, effectiveCost - (salesPrice * (targetIdealCostPct / 100)));
+            const estimatedYearlySalesVolume = 12000;
+            const totalYearlySavings = potentialSavingsPerPlate * estimatedYearlySalesVolume;
+
+            document.getElementById('out-yearly-savings').textContent = '$' + Math.round(totalYearlySavings).toLocaleString();
+        }
+
+        // Attach listeners to cost simulator input items
+        document.getElementById('sim-sales-price').addEventListener('input', runCostCalculator);
+        document.getElementById('sim-raw-cost').addEventListener('input', runCostCalculator);
+        document.getElementById('sim-prep-waste').addEventListener('input', runCostCalculator);
+
+        // Form Submission Logic
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const intakeData = {
+                fullname: document.getElementById('form-fullname').value,
+                brandname: document.getElementById('form-brandname').value,
+                email: document.getElementById('form-email').value,
+                challenge: document.getElementById('form-challenge').value,
+                stage: document.getElementById('form-stage').value,
+                scale: document.getElementById('form-scale').value,
+                details: document.getElementById('form-details').value,
+                status: 'new',
+                timestamp: Date.now(),
+                logs: [
+                    { date: new Date().toLocaleString(), text: "Consultation Form Submitted." }
+                ]
+            };
+
+            const alertBox = document.getElementById('form-alert');
+            alertBox.classList.remove('hidden');
+
+            // Persist to real Firestore if configured (RULE 1)
+            if (window.isFirebaseActive && window.db) {
+                try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'holistic-consulting-b2b';
+                    const publicCollection = collection(window.db, 'artifacts', appId, 'public', 'data', 'intakes');
+                    await addDoc(publicCollection, intakeData);
+                } catch (e) {
+                    console.error("Firestore persistence error, saving locally:", e);
+                    saveToLocalStore(intakeData);
+                }
+            } else {
+                saveToLocalStore(intakeData);
+            }
+
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+                document.getElementById('intake-form').reset();
+                navigateTo('admin');
+            }, 2500);
+        }
+
+        function saveToLocalStore(data) {
+            let existing = JSON.parse(localStorage.getItem('hh_simulated_intakes')) || [];
+            data.id = "sim-" + Date.now();
+            existing.unshift(data);
+            localStorage.setItem('hh_simulated_intakes', JSON.stringify(existing));
+            window.loadedIntakes = existing;
+            renderAdminDashboard();
+        }
+
+        // Event Story Gallery Operations
+        function renderEventGallery() {
+            const container = document.getElementById('event-gallery-grid');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            let localStories = JSON.parse(localStorage.getItem('hh_custom_stories')) || [];
+            let allStories = [...localStories, ...window.seededStories];
+
+            allStories.forEach(story => {
+                const card = document.createElement('div');
+                card.className = "bg-cardbg border border-electricblue/10 overflow-hidden hover:border-cyanaccent/40 transition duration-300 flex flex-col justify-between";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${story.image}" alt="${story.title}" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500" onerror="this.src='https://placehold.co/600x400/0d1527/0066ff?text=Operational+Movement'">
+                            <span class="absolute top-3 left-3 bg-electricblue text-white text-[10px] uppercase font-mono px-2 py-1">${story.category}</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-[9px] text-mutedblue font-mono">${story.date}</span>
+                            <h4 class="font-serif text-lg text-white font-semibold">${story.title}</h4>
+                            <p class="text-xs text-iceblue/70 leading-relaxed font-light">${story.body}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-electricblue/5 mt-4">
+                        <button onclick="navigateTo('contact')" class="text-xs text-electricblue hover:text-cyanaccent transition font-bold uppercase tracking-wider">
+                            Book Similar Launch Event <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleStoryModal(show) {
+            const modal = document.getElementById('story-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.getElementById('story-date').value = new Date().toISOString().split('T')[0];
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function handleStorySubmit(event) {
+            event.preventDefault();
+
+            let title = document.getElementById('story-title').value;
+            let category = document.getElementById('story-category').value;
+            let date = document.getElementById('story-date').value;
+            let body = document.getElementById('story-body').value;
+            let image = document.getElementById('story-image').value;
+
+            if (!image) {
+                image = `https://placehold.co/600x400/0d1527/0066ff?text=${encodeURIComponent(title)}`;
+            }
+
+            let newStory = {
+                id: "custom-story-" + Date.now(),
+                title,
+                category,
+                date,
+                body,
+                image
+            };
+
+            let localStories = JSON.parse(localStorage.getItem('hh_custom_stories')) || [];
+            localStories.unshift(newStory);
+            localStorage.setItem('hh_custom_stories', JSON.stringify(localStories));
+
+            document.getElementById('story-form').reset();
+            toggleStoryModal(false);
+            renderEventGallery();
+        }
+
+        // ADMIN PORTAL FUNCTIONAL SYSTEMS
+        function renderAdminDashboard() {
+            const listContainer = document.getElementById('admin-records-list');
+            if (!listContainer) return;
+
+            listContainer.innerHTML = '';
+
+            const list = window.loadedIntakes || [];
+
+            // UI Stat Recalculations
+            document.getElementById('admin-stat-total').textContent = list.length;
+            document.getElementById('admin-stat-new').textContent = list.filter(r => r.status === 'new').length;
+            document.getElementById('admin-stat-review').textContent = list.filter(r => r.status === 'review').length;
+
+            if (list.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-10 text-xs text-iceblue/40">
+                        No intake inquiries found. Register a new lead on the intake page.
+                    </div>
+                `;
+                return;
+            }
+
+            list.forEach(record => {
+                const card = document.createElement('div');
+                const isSelected = record.id === window.selectedRecordId;
+                
+                card.className = `p-4 border transition cursor-pointer flex justify-between items-center ${
+                    isSelected 
+                        ? 'bg-electricblue/15 border-electricblue' 
+                        : 'bg-blueblack/80 border-electricblue/10 hover:border-electricblue/30'
+                }`;
+                
+                // Get pretty names for challenge badge
+                let challengeLabel = "Operational Audit";
+                if (record.challenge === 'high-food-cost') challengeLabel = "Cost Control";
+                else if (record.challenge === 'concept-blueprint') challengeLabel = "New Launch";
+                else if (record.challenge === 'staff-turnover') challengeLabel = "SOP / Staffing";
+                else if (record.challenge === 'menu-rebuild') challengeLabel = "Menu Styling";
+
+                // Setup Status Color Badges
+                let statusBadgeStyle = "bg-amber-500/10 text-amber-500 border border-amber-500/30";
+                if (record.status === 'review') statusBadgeStyle = "bg-blue-400/10 text-blue-400 border border-blue-400/30";
+                else if (record.status === 'contacted') statusBadgeStyle = "bg-purple-400/10 text-purple-400 border border-purple-400/30";
+                else if (record.status === 'completed') statusBadgeStyle = "bg-emerald-400/10 text-emerald-400 border border-emerald-400/30";
+
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-serif font-semibold text-white text-sm">${record.brandname}</h4>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded-sm uppercase font-mono ${statusBadgeStyle}">
+                                ${record.status}
+                            </span>
+                        </div>
+                        <p class="text-xs text-iceblue/60 font-light">Lead: ${record.fullname}</p>
+                        <p class="text-[10px] text-electricblue font-mono">${challengeLabel}</p>
+                    </div>
+                    <div class="text-right flex flex-col items-end gap-2">
+                        <span class="text-[9px] text-iceblue/40 font-mono">${new Date(record.timestamp || Date.now()).toLocaleDateString()}</span>
+                        <button onclick="selectIntakeRecord('${record.id}')" class="px-2 py-1 border border-electricblue/20 text-[9px] uppercase font-bold text-electricblue hover:bg-electricblue hover:text-white transition-all">
+                            View Console
+                        </button>
+                    </div>
+                `;
+                
+                listContainer.appendChild(card);
+            });
+
+            // Keep Details Card synchronized after data reloads
+            if (window.selectedRecordId) {
+                const record = list.find(r => r.id === window.selectedRecordId);
+                if (record) {
+                    populateDetails(record);
+                }
+            }
+        }
+
+        // Search & Filter Operations
+        function filterRecords() {
+            const query = document.getElementById('admin-search-input').value.toLowerCase();
+            const filterChallenge = document.getElementById('admin-filter-challenge').value;
+
+            let sourceList = [];
+            if (window.isFirebaseActive) {
+                sourceList = window.loadedIntakes || [];
+            } else {
+                sourceList = JSON.parse(localStorage.getItem('hh_simulated_intakes')) || [];
+            }
+
+            const filtered = sourceList.filter(record => {
+                const matchesSearch = record.fullname.toLowerCase().includes(query) || 
+                                      record.brandname.toLowerCase().includes(query);
+                const matchesChallenge = filterChallenge === 'all' || record.challenge === filterChallenge;
+                return matchesSearch && matchesChallenge;
+            });
+
+            const listContainer = document.getElementById('admin-records-list');
+            listContainer.innerHTML = '';
+
+            filtered.forEach(record => {
+                const card = document.createElement('div');
+                const isSelected = record.id === window.selectedRecordId;
+                
+                card.className = `p-4 border transition cursor-pointer flex justify-between items-center ${
+                    isSelected 
+                        ? 'bg-electricblue/15 border-electricblue' 
+                        : 'bg-blueblack/80 border-electricblue/10 hover:border-electricblue/30'
+                }`;
+
+                let challengeLabel = "Operational Audit";
+                if (record.challenge === 'high-food-cost') challengeLabel = "Cost Control";
+                else if (record.challenge === 'concept-blueprint') challengeLabel = "New Launch";
+                else if (record.challenge === 'staff-turnover') challengeLabel = "SOP / Staffing";
+                else if (record.challenge === 'menu-rebuild') challengeLabel = "Menu Styling";
+
+                let statusBadgeStyle = "bg-amber-500/10 text-amber-500 border border-amber-500/30";
+                if (record.status === 'review') statusBadgeStyle = "bg-blue-400/10 text-blue-400 border border-blue-400/30";
+                else if (record.status === 'contacted') statusBadgeStyle = "bg-purple-400/10 text-purple-400 border border-purple-400/30";
+                else if (record.status === 'completed') statusBadgeStyle = "bg-emerald-400/10 text-emerald-400 border border-emerald-400/30";
+
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-serif font-semibold text-white text-sm">${record.brandname}</h4>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded-sm uppercase font-mono ${statusBadgeStyle}">
+                                ${record.status}
+                            </span>
+                        </div>
+                        <p class="text-xs text-iceblue/60 font-light">Lead: ${record.fullname}</p>
+                        <p class="text-[10px] text-electricblue font-mono">${challengeLabel}</p>
+                    </div>
+                    <div class="text-right flex flex-col items-end gap-2">
+                        <span class="text-[9px] text-iceblue/40 font-mono">${new Date(record.timestamp || Date.now()).toLocaleDateString()}</span>
+                        <button onclick="selectIntakeRecord('${record.id}')" class="px-2 py-1 border border-electricblue/20 text-[9px] uppercase font-bold text-electricblue hover:bg-electricblue hover:text-white transition-all">
+                            View Console
+                        </button>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        // Select & populate detailed dashboard
+        function selectIntakeRecord(id) {
+            window.selectedRecordId = id;
+            
+            // Re-render list highlights
+            const items = document.querySelectorAll('#admin-records-list > div');
+            renderAdminDashboard();
+
+            const record = window.loadedIntakes.find(r => r.id === id);
+            if (record) {
+                document.getElementById('admin-detail-placeholder').classList.add('hidden');
+                document.getElementById('admin-detail-card').classList.remove('hidden');
+                populateDetails(record);
+            }
+        }
+
+        function populateDetails(record) {
+            document.getElementById('detail-brand').textContent = record.brandname;
+            document.getElementById('detail-owner').textContent = `Client: ${record.fullname} | Status Management Console`;
+            document.getElementById('detail-status-select').value = record.status || 'new';
+            document.getElementById('detail-stage').textContent = record.stage.toUpperCase();
+            document.getElementById('detail-scale').textContent = record.scale.toUpperCase();
+            
+            let challengeLabel = "Operational Optimization Restructure";
+            if (record.challenge === 'high-food-cost') challengeLabel = "F&B Cost Control Auditing";
+            else if (record.challenge === 'concept-blueprint') challengeLabel = "Concept Launch Path Checklist";
+            else if (record.challenge === 'staff-turnover') challengeLabel = "Staffing SOP Framework Drafting";
+            else if (record.challenge === 'menu-rebuild') challengeLabel = "Visual Menu Psychology Engineering";
+            
+            document.getElementById('detail-challenge').textContent = challengeLabel;
+            document.getElementById('detail-notes').textContent = record.details || "No additional parameters submitted.";
+            document.getElementById('detail-email').textContent = record.email;
+            document.getElementById('detail-email-btn').href = `mailto:${record.email}?subject=Holistic Consulting - Your Operational Intake Review&body=Dear ${record.fullname},%0D%0A%0D%0AThank you for submitting your brand details. We have reviewed your target objective for ${record.brandname}. Let's schedule a discovery coordination.`;
+
+            // Render Communication logs
+            const logsContainer = document.getElementById('detail-logs-list');
+            logsContainer.innerHTML = '';
+            
+            const logs = record.logs || [];
+            if (logs.length === 0) {
+                logsContainer.innerHTML = `<p class="text-iceblue/40 italic text-[11px]">No touchpoints registered yet.</p>`;
+            } else {
+                logs.forEach(log => {
+                    const row = document.createElement('div');
+                    row.className = "p-2 bg-blueblack/30 border border-electricblue/5 rounded-none flex flex-col gap-0.5";
+                    row.innerHTML = `
+                        <span class="text-[9px] text-electricblue/60 font-mono">${log.date}</span>
+                        <p class="text-xs text-iceblue/80">${log.text}</p>
+                    `;
+                    logsContainer.appendChild(row);
+                });
+            }
+        }
+
+        // Modifying Status on Lead
+        async function updateRecordStatus() {
+            const select = document.getElementById('detail-status-select');
+            const newStatus = select.value;
+            
+            const record = window.loadedIntakes.find(r => r.id === window.selectedRecordId);
+            if (!record) return;
+
+            const originalStatus = record.status;
+            record.status = newStatus;
+            
+            // Log automated system event
+            const logEntry = {
+                date: new Date().toLocaleString(),
+                text: `Status changed from ${originalStatus.toUpperCase()} to ${newStatus.toUpperCase()}`
+            };
+            record.logs.push(logEntry);
+
+            if (window.isFirebaseActive && window.db) {
+                try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'holistic-consulting-b2b';
+                    const docRef = doc(window.db, 'artifacts', appId, 'public', 'data', 'intakes', record.id);
+                    await updateDoc(docRef, {
+                        status: newStatus,
+                        logs: record.logs
+                    });
+                } catch (e) {
+                    console.error("Firestore update failed:", e);
+                }
+            } else {
+                saveFullLocalState();
+            }
+
+            renderAdminDashboard();
+        }
+
+        // Logging manual communications
+        async function addCommunicationLog() {
+            const input = document.getElementById('admin-log-input');
+            const noteText = input.value.trim();
+            if (!noteText) return;
+
+            const record = window.loadedIntakes.find(r => r.id === window.selectedRecordId);
+            if (!record) return;
+
+            const logEntry = {
+                date: new Date().toLocaleString(),
+                text: noteText
+            };
+            record.logs.push(logEntry);
+            input.value = '';
+
+            if (window.isFirebaseActive && window.db) {
+                try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'holistic-consulting-b2b';
+                    const docRef = doc(window.db, 'artifacts', appId, 'public', 'data', 'intakes', record.id);
+                    await updateDoc(docRef, { logs: record.logs });
+                } catch (e) {
+                    console.error("Firestore log addition failed:", e);
+                }
+            } else {
+                saveFullLocalState();
+            }
+
+            renderAdminDashboard();
+        }
+
+        function quickLog(text) {
+            document.getElementById('admin-log-input').value = text;
+            addCommunicationLog();
+        }
+
+        function saveFullLocalState() {
+            localStorage.setItem('hh_simulated_intakes', JSON.stringify(window.loadedIntakes));
+        }
+
+        function resetSimulatedData() {
+            localStorage.removeItem('hh_simulated_intakes');
+            localStorage.removeItem('hh_custom_stories');
+            window.selectedRecordId = null;
+            document.getElementById('admin-detail-placeholder').classList.remove('hidden');
+            document.getElementById('admin-detail-card').classList.add('hidden');
+            
+            // Re-trigger simulator state
+            const hasConfig = typeof __firebase_config !== 'undefined';
+            if (!hasConfig) {
+                let existing = JSON.parse(localStorage.getItem('hh_simulated_intakes')) || [];
+                if (existing.length === 0) {
+                    localStorage.removeItem('hh_simulated_intakes');
+                    location.reload();
+                }
+            }
+        }
+
+        let scene, camera, renderer, particles, meshGrid = [];
+        let isOptimized = false;
+        let animationFrameId;
+
+        function initThreeJS() {
+            const container = document.getElementById('three-canvas-container');
+            const canvas = document.getElementById('three-canvas');
+            
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x050B14); // Updated to Blue-Black
+
+            camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+            camera.position.set(0, 15, 25);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0x0066FF, 1.5, 100); // Updated to Electric Blue
+            pointLight.position.set(10, 20, 10);
+            scene.add(pointLight);
+
+            const gridHelper = new THREE.GridHelper(20, 20, 0x0066FF, 0x111D33);
+            gridHelper.position.y = -2;
+            scene.add(gridHelper);
+
+            const tablesCount = 8;
+            const tableGeometry = new THREE.CylinderGeometry(0.8, 0.8, 1.2, 8);
+            
+            for (let i = 0; i < tablesCount; i++) {
+                const angle = (i / tablesCount) * Math.PI * 2;
+                const radius = 6;
+                const x = Math.cos(angle) * radius;
+                const z = Math.sin(angle) * radius;
+
+                const tableMaterial = new THREE.MeshPhongMaterial({
+                    color: 0x0066FF, // Updated to Electric Blue
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.8
+                });
+
+                const tableMesh = new THREE.Mesh(tableGeometry, tableMaterial);
+                tableMesh.position.set(x, -1.4, z);
+                scene.add(tableMesh);
+                meshGrid.push(tableMesh);
+            }
+
+            const particleCount = 60;
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+            const colors = [];
+
+            for (let i = 0; i < particleCount; i++) {
+                positions.push((Math.random() - 0.5) * 15);
+                positions.push((Math.random() - 0.5) * 4);
+                positions.push((Math.random() - 0.5) * 15);
+                colors.push(0.9, 0.2, 0.2); // Chaotic Red particles
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.3,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.9
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+            });
+
+            canvas.addEventListener('mousemove', (e) => {
+                const deltaMove = {
+                    x: e.offsetX - previousMousePosition.x,
+                    y: e.offsetY - previousMousePosition.y
+                };
+
+                if (isDragging) {
+                    scene.rotation.y += deltaMove.x * 0.005;
+                    scene.rotation.x += deltaMove.y * 0.005;
+                }
+
+                previousMousePosition = {
+                    x: e.offsetX,
+                    y: e.offsetY
+                };
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            window.addEventListener('resize', () => {
+                if (!container) return;
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+
+            animate();
+        }
+
+        // 3D Animation Loop
+        function animate() {
+            animationFrameId = requestAnimationFrame(animate);
+
+            if (scene) {
+                scene.rotation.y += 0.002;
+            }
+
+            if (particles) {
+                const positions = particles.geometry.attributes.position.array;
+                const particleCount = positions.length / 3;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const idx = i * 3;
+                    
+                    if (isOptimized) {
+                        const angle = 0.02;
+                        const x = positions[idx];
+                        const z = positions[idx + 2];
+                        positions[idx] = x * Math.cos(angle) - z * Math.sin(angle);
+                        positions[idx + 2] = x * Math.sin(angle) + z * Math.cos(angle);
+                        positions[idx + 1] = Math.sin(positions[idx] * 0.5) * 0.5;
+                    } else {
+                        positions[idx] += (Math.random() - 0.5) * 0.15;
+                        positions[idx + 1] += (Math.random() - 0.5) * 0.05;
+                        positions[idx + 2] += (Math.random() - 0.5) * 0.15;
+
+                        if (Math.abs(positions[idx]) > 8) positions[idx] = (Math.random() - 0.5) * 10;
+                        if (Math.abs(positions[idx + 1]) > 2) positions[idx + 1] = (Math.random() - 0.5) * 2;
+                        if (Math.abs(positions[idx + 2]) > 8) positions[idx + 2] = (Math.random() - 0.5) * 10;
+                    }
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        document.getElementById('flow-optimize-btn').addEventListener('click', () => {
+            isOptimized = !isOptimized;
+            const statusText = document.getElementById('visualizer-status');
+            const btn = document.getElementById('flow-optimize-btn');
+
+            if (isOptimized) {
+                statusText.textContent = "Laminar Path Flow Standard (Optimized)";
+                statusText.className = "font-semibold text-cyanaccent";
+                btn.textContent = "Reset Flow";
+                btn.className = "px-3 py-1.5 bg-cyanaccent/20 border border-cyanaccent text-cyanaccent hover:bg-electricblue hover:text-white transition-all duration-300 font-bold uppercase tracking-widest text-[9px]";
+
+                const colors = particles.geometry.attributes.color.array;
+                for (let i = 0; i < colors.length; i += 3) {
+                    colors[i] = 0.0;
+                    colors[i + 1] = 0.9;
+                    colors[i + 2] = 1.0; // Optimized Cyan/Blue flow
+                }
+                particles.geometry.attributes.color.needsUpdate = true;
+
+                meshGrid.forEach(m => {
+                    m.material.color.setHex(0x00E5FF);
+                });
+
+            } else {
+                statusText.textContent = "Kitchen & Floor Efficiency Analysis";
+                statusText.className = "font-semibold text-electricblue";
+                btn.textContent = "Optimize Flow";
+                btn.className = "px-3 py-1.5 bg-electricblue/15 border border-electricblue/30 hover:bg-electricblue hover:text-white text-electricblue transition-all duration-300 font-bold uppercase tracking-widest text-[9px]";
+
+                const colors = particles.geometry.attributes.color.array;
+                for (let i = 0; i < colors.length; i += 3) {
+                    colors[i] = 0.9;
+                    colors[i + 1] = 0.2;
+                    colors[i + 2] = 0.2; // Return to chaotic red
+                }
+                particles.geometry.attributes.color.needsUpdate = true;
+
+                meshGrid.forEach(m => {
+                    m.material.color.setHex(0x0066FF);
+                });
+            }
+        });
+
+        // Initialize script logic on window load
+        window.onload = function() {
+            initThreeJS();
+            runCostCalculator();
+            renderEventGallery();
+        }
+    </script>
+</body>
+</html>
